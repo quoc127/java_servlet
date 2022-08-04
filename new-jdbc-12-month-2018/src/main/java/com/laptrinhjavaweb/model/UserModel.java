@@ -1,11 +1,33 @@
 package com.laptrinhjavaweb.model;
 
-public class UserModel {
+
+public class UserModel extends AbastracModel {
 	
+	private String password;
+	private int status;
+	private Long roleId;
 	private String userName;
 	private String fullName;
 	
 	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public Long getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
 	
 	public String getUserName() {
 		return userName;
