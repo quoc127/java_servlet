@@ -1,71 +1,67 @@
 package com.laptrinhjavaweb.dao.impl;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.laptrinhjavaweb.dao.INewDAO;
+import com.laptrinhjavaweb.mapper.NewMapper;
 import com.laptrinhjavaweb.model.NewModel;
 
-public class NewDAO implements INewDAO{
-
-	public Connection getConnection() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:8000/newservlet12month2018";
-			String user = "root";
-			String password = "quocngu198";
-			return DriverManager.getConnection(url, user, password);
-		} catch (ClassNotFoundException | SQLException e) {
-			return null;
-			
-		}
-	}
-	
+public class NewDAO extends AbstractDAO<NewModel> implements INewDAO{
 	@Override
 	public List<NewModel> findByCategoryId(Long categoryId) {
-		List<NewModel> results = new ArrayList<>();
 		String sql = "SELECT * FROM news WHERE categoryid = ?";
-		// mở connection
-		Connection connection = getConnection();
-		PreparedStatement stament = null;	
-		ResultSet resultSet = null;
+		return query(sql, new NewMapper(), categoryId);
+	}
+
+	@Override
+	public Long save(NewModel newModel) {
+		ResultSet resultSet =  null;
+		Long id = null;
+		Connection connection = null;
+		PreparedStatement statement = null; 
+		try {
+			String sql = "INSERT INTO news(title, content, categoryId) VALUES(?,?,?)";
+			connection = getConnection();
+			statement = connection.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, newModel.getTitle());
+			statement.setString(2, newModel.getContent());
+			statement.setLong(3, newModel.getCategoryId());
+			statement.executeUpdate();
+			resultSet = statement.getGeneratedKeys();
+			if (resultSet.next()) {
+				id =  resultSet.getLong(1);
+			}
+			connection.commit();
+			return id;
+		} catch (SQLException e) {
 			if (connection != null) {
 				try {
-					stament = connection.prepareStatement(sql);
-					stament.setLong(1, categoryId);
-					resultSet = stament.executeQuery();
-					while (resultSet.next()) {
-						NewModel news = new NewModel();
-						news.setId(resultSet.getLong("id"));
-						news.setId(resultSet.getLong("title"));
-						results.add(news);
-					}
-					return results;
-				} catch (SQLException e) {
-					return null;
-				}
-				finally {
-					try {
-						if (connection != null) {
-							connection.close();
-						}
-						if (stament != null) {
-							stament.close();
-						}
-						if (resultSet != null) {
-							resultSet.close();
-						}
-					} catch (SQLException e2) {
-						return null;
-					}
+					connection.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
 				}
 			}
-		return results;
+			return null;
+		}  finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e2) {
+				return null;
+			}
+		}
+	
 	}
 
 }
