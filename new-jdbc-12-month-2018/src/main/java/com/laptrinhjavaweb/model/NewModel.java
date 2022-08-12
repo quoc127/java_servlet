@@ -1,14 +1,11 @@
 package com.laptrinhjavaweb.model;
 
-
-public class NewModel extends AbastracModel{
-	
+public class NewModel extends AbstractModel {
 	private String title;
 	private String thumbnail;
 	private String shortDescription;
 	private String content;
 	private Long categoryId;
-	
 	
 	public String getTitle() {
 		return title;
@@ -40,7 +37,6 @@ public class NewModel extends AbastracModel{
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
-	
-	
-	
+
+
 }

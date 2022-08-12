@@ -1,8 +1,7 @@
 package com.laptrinhjavaweb.model;
 
 
-public class UserModel extends AbastracModel {
-	
+public class UserModel extends AbstractModel{
 	private String password;
 	private int status;
 	private Long roleId;
@@ -41,5 +40,6 @@ public class UserModel extends AbastracModel {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+	
 	
 }

@@ -1,11 +1,9 @@
 package com.laptrinhjavaweb.model;
 
-public class CommentModel extends AbastracModel{
-	
+public class CommentModel extends AbstractModel{
 	private String content;
 	private Long userId;
 	private Long newId;
-	
 	
 	public String getContent() {
 		return content;
@@ -25,6 +23,5 @@ public class CommentModel extends AbastracModel{
 	public void setNewId(Long newId) {
 		this.newId = newId;
 	}
-	
 	
 }

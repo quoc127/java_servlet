@@ -2,26 +2,24 @@ package com.laptrinhjavaweb.model;
 
 import java.sql.Timestamp;
 
-public class AbastracModel {
-	
-	private Long Id;
-	private Timestamp createdDate;
+public class AbstractModel {
+	private Long id;
+	private Timestamp createDate;
 	private Timestamp modifiedDate;
-	private String createdBy;
+	private String createBy;
 	private String modifiedBy;
 	
-	
 	public Long getId() {
-		return Id;
+		return id;
 	}
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
-	public Timestamp getCreatedDate() {
-		return createdDate;
+	public Timestamp getCreateDate() {
+		return createDate;
 	}
-	public void setCreatedDate(Timestamp createdDate) {
-		this.createdDate = createdDate;
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
 	}
 	public Timestamp getModifiedDate() {
 		return modifiedDate;
@@ -29,11 +27,11 @@ public class AbastracModel {
 	public void setModifiedDate(Timestamp modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	public String getCreatedBy() {
-		return createdBy;
+	public String getCreateBy() {
+		return createBy;
 	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 	public String getModifiedBy() {
 		return modifiedBy;

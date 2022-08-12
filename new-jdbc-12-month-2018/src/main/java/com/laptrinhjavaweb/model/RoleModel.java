@@ -1,25 +1,21 @@
 package com.laptrinhjavaweb.model;
 
+public class RoleModel extends AbstractModel{
+	
+	private int code;
+	private Long name;
 
-public class RoleModel extends AbastracModel{
-	
-	private String code;
-	private String name;
-	
-	
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
-	public String getName() {
+	public Long getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public void setName(Long name) {
 		this.name = name;
 	}
-	
-	
 	
 }
