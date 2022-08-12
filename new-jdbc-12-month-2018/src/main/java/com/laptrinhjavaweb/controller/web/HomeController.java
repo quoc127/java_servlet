@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.laptrinhjavaweb.dao.INewDAO;
+import com.laptrinhjavaweb.model.NewModel;
 import com.laptrinhjavaweb.service.ICategoryService;
 import com.laptrinhjavaweb.service.INewService;
 
@@ -26,8 +26,7 @@ public class HomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Long categoryid = 1L; 
-		request.setAttribute("news", newService.findByCategoryId(categoryid));
+		
 		request.setAttribute("categories", categoryService.findAll());
 		RequestDispatcher rd = request.getRequestDispatcher("views/web/home.jsp");
 		rd.forward(request, response);
