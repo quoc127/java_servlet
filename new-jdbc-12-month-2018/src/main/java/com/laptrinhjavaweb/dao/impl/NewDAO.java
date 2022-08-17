@@ -15,8 +15,12 @@ public class NewDAO extends AbstracDAO<NewModel>implements INewDAO {
 
 	@Override
 	public Long save(NewModel newModel) {
-		String sql = "INSERT INTO news (title, content, categoryid) VALUES(?, ?, ?)";
-		return insert(sql, newModel.getTitle(), newModel.getContent(), newModel.getCategoryId());
+		StringBuilder sql = new StringBuilder("INSERT INTO news (title, content,");
+		sql.append(" thumbnail, shortdescription, categoryid, createddate, createdby)");
+		sql.append(" VALUES(?, ?, ?, ?, ?, ?, ?)");
+		return insert(sql.toString(), newModel.getTitle(), newModel.getContent(), 
+				newModel.getThumbnail(), newModel.getShortDescription(), newModel.getCategoryId(),
+				newModel.getCreateDate(), newModel.getCreateBy());
 
 	}
 
@@ -31,11 +35,11 @@ public class NewDAO extends AbstracDAO<NewModel>implements INewDAO {
 	public void update(NewModel updateNew) {
 		StringBuilder sql = new StringBuilder("UPDATE news SET title = ?, thumbnail = ?,");
 		sql.append("shortdescription = ?, content = ?, categoryid = ?,");
-		sql.append("createddate = ?, createdby = ? WHERE id = ?");
+		sql.append("createddate = ?, createdby = ?, modifieddate = ?, modifiedby= ? WHERE id = ?");
 		update(sql.toString(), updateNew.getTitle(), updateNew.getThumbnail(), updateNew.getShortDescription(),
 				updateNew.getContent(), updateNew.getCategoryId(), 
-				updateNew.getCreateDate(), updateNew.getCreateBy(), updateNew.getId());
-		
+				updateNew.getCreateDate(), updateNew.getCreateBy(), updateNew.getId(),
+				updateNew.getModifiedDate(), updateNew.getModifiedBy());
 	}
 
 	@Override
