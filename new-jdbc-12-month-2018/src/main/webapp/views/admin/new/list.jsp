@@ -31,7 +31,6 @@
 										<thead>
 											<tr>
 												<th scope="col">#</th>
-												<th scope="col">Tên bài viết</th>
 												<th scope="col">Mô tả ngắn</th>
 												
 											</tr>
@@ -42,7 +41,7 @@
 												<td>Mark</td>
 												<td>Mark1</td>
 											</tr> -->
-										<c:forEach var="item" items="${listResult}">
+										<c:forEach var="item" items="${model.listResult}">
 														<tr>
 														
 															<td>${item.title}</td>

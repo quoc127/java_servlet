@@ -25,7 +25,7 @@ public class NewController extends HttpServlet {
 			throws ServletException, IOException {
 		NewModel model = new NewModel();
 		model.setListResult(newService.findAll());
-		request.setAttribute(SystemContstan.MODEL, "model");
+		request.setAttribute(SystemContstan.MODEL, model);
 		RequestDispatcher rd = request.getRequestDispatcher("views/admin/new/list.jsp");
 		rd.forward(request, response);
 	}
