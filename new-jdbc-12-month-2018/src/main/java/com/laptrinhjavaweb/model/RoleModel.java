@@ -1,6 +1,6 @@
 package com.laptrinhjavaweb.model;
 
-public class RoleModel extends AbstractModel{
+public class RoleModel extends AbstractModel<RoleModel>{
 	
 	private int code;
 	private Long name;

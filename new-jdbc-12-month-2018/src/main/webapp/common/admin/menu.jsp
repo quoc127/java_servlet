@@ -44,7 +44,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li>
-                    <a href="#">
+                    <a href='<c:url value="/admin-new"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         Danh sách bài viết
                     </a>

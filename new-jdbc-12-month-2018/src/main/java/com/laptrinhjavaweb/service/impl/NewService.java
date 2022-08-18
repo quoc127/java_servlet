@@ -44,5 +44,11 @@ public class NewService implements INewService{
 			newDao.delete(id);
 		}
 	}
+
+	@Override
+	public List<NewModel> findAll() {
+		
+		return newDao.fineAll();
+	}
 	
 }

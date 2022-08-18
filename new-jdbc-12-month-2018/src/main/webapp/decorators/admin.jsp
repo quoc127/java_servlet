@@ -15,6 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type='text/javascript' src='<c:url value="/template/admin/js/jquery-2.2.3.min.js" />'></script>
     <script src="<c:url value='/template/admin/assets/js/jquery.2.1.1.min.js' />"></script>
+    <script src="<c:url value='/template/paging/jquery.twbsPagination.js' />"></script>
 </head>
 <body class="no-skin">
 
