@@ -14,7 +14,7 @@ public class HttpUtil {
 	}
 	
 	public <T> T toModel(Class<T> toClass) {
-		try {
+		try {	
 			return new ObjectMapper().readValue(value, toClass);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

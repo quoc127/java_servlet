@@ -60,8 +60,8 @@
 			<artifactId>weld-servlet</artifactId>
 			<version>${weld.servlet.version}</version>
 		</dependency>
-		
-		<!-- JSON  -->
+
+		<!-- JSON -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -88,7 +88,13 @@
 			<artifactId>jackson-core-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		<!-- JSON  -->
+		<!-- JSON -->
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -49,10 +49,16 @@ public class NewDAO extends AbstracDAO<NewModel>implements INewDAO {
 	}
 
 	@Override
-	public List<NewModel> fineAll() {
-		String sql = "SELECT * FROM news";
-		return query(sql, new NewMapper());
+	public List<NewModel> fineAll(Integer offset, Integer limit) {
+		String sql = "SELECT * FROM news LIMIT ?, ?";
+		return query(sql, new NewMapper(), offset, limit);
 	
+	}
+
+	@Override
+	public int getTotalItem() {
+		String sql = "SELECT count(*) FROM news";
+		return count(sql);
 	}
 	
 }
