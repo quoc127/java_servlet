@@ -1,12 +1,14 @@
 package com.laptrinhjavaweb.dao.impl;
 
 import java.util.List;
+
 import com.laptrinhjavaweb.dao.INewDAO;
 import com.laptrinhjavaweb.mapper.NewMapper;
 import com.laptrinhjavaweb.model.NewModel;
+import com.laptrinhjavaweb.paging.Pageble;
 
-public class NewDAO extends AbstracDAO<NewModel>implements INewDAO {
-	
+public class NewDAO extends AbstracDAO<NewModel> implements INewDAO {
+
 	@Override
 	public List<NewModel> findByCategoryId(Long categoryId) {
 		String sql = "SELECT * FROM news WHERE categoryid = ?";
@@ -18,9 +20,9 @@ public class NewDAO extends AbstracDAO<NewModel>implements INewDAO {
 		StringBuilder sql = new StringBuilder("INSERT INTO news (title, content,");
 		sql.append(" thumbnail, shortdescription, categoryid, createddate, createdby)");
 		sql.append(" VALUES(?, ?, ?, ?, ?, ?, ?)");
-		return insert(sql.toString(), newModel.getTitle(), newModel.getContent(), 
-				newModel.getThumbnail(), newModel.getShortDescription(), newModel.getCategoryId(),
-				newModel.getCreateDate(), newModel.getCreateBy());
+		return insert(sql.toString(), newModel.getTitle(), newModel.getContent(), newModel.getThumbnail(),
+				newModel.getShortDescription(), newModel.getCategoryId(), newModel.getCreateDate(),
+				newModel.getCreateBy());
 
 	}
 
@@ -37,9 +39,8 @@ public class NewDAO extends AbstracDAO<NewModel>implements INewDAO {
 		sql.append("shortdescription = ?, content = ?, categoryid = ?,");
 		sql.append("createddate = ?, createdby = ?, modifieddate = ?, modifiedby= ? WHERE id = ?");
 		update(sql.toString(), updateNew.getTitle(), updateNew.getThumbnail(), updateNew.getShortDescription(),
-				updateNew.getContent(), updateNew.getCategoryId(), 
-				updateNew.getCreateDate(), updateNew.getCreateBy(), updateNew.getId(),
-				updateNew.getModifiedDate(), updateNew.getModifiedBy());
+				updateNew.getContent(), updateNew.getCategoryId(), updateNew.getCreateDate(), updateNew.getCreateBy(),
+				updateNew.getId(), updateNew.getModifiedDate(), updateNew.getModifiedBy());
 	}
 
 	@Override
@@ -49,10 +50,21 @@ public class NewDAO extends AbstracDAO<NewModel>implements INewDAO {
 	}
 
 	@Override
-	public List<NewModel> fineAll(Integer offset, Integer limit) {
-		String sql = "SELECT * FROM news LIMIT ?, ?";
-		return query(sql, new NewMapper(), offset, limit);
-	
+	public List<NewModel> findAll(Pageble pageble) {
+
+		/*
+		 * String sql = "SELECT * FROM news LIMIT ?, ?"; return query(sql,new
+		 * NewMapper(), offset, limit);
+		 */
+
+		StringBuilder sql = new StringBuilder("SELECT * FROM news");
+		if (pageble.getSorter() != null ) {
+			sql.append(" ORDER BY "+pageble.getSorter().getSortName()+" "+pageble.getSorter().getSortBy()+"");
+		}
+		if (pageble.getOffset() != null && pageble.getLimit() != null) {
+			sql.append(" LIMIT "+pageble.getOffset()+", "+pageble.getLimit()+"");
+		}
+		return query(sql.toString(), new NewMapper());
 	}
 
 	@Override
@@ -60,5 +72,5 @@ public class NewDAO extends AbstracDAO<NewModel>implements INewDAO {
 		String sql = "SELECT count(*) FROM news";
 		return count(sql);
 	}
-	
+
 }

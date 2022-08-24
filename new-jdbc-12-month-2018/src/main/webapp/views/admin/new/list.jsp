@@ -1,25 +1,24 @@
 <%@include file="/common/taglib.jsp"%>
-<%@ page isELIgnored="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<title>Danh sách bài viết</title>
-</head>
-<body>
-	<div class="main-content">
-		<form action="<c:url value="admin-new"/>" id="formSubmit" method="get">
-			<div class="main-content">
+    pageEncoding="UTF-8"%>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Danh sách bài viết</title>
+	</head>
+
+	<body>
+		<div class="main-content">
+		<form action="<c:url value='/admin-new'/>" id="formSubmit" method="get">
 				<div class="main-content-inner">
 					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 						<ul class="breadcrumb">
-							<li><i class="ace-icon fa fa-home home-icon"></i> <a
-								href="#">Trang chủ</a></li>
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="#">Trang chủ</a>
+							</li>
 						</ul>
 						<!-- /.breadcrumb -->
 					</div>
@@ -31,31 +30,25 @@
 										<div class="table-responsive">
 											<table class="table table-bordered">
 												<thead>
-													<tr>
-														<th scope="col">#</th>
-														<th scope="col">Mô tả ngắn</th>
-
+													<tr>												
+														<th>Tên bài viết</th>
+														<th>Mô tả ngắn</th>													
 													</tr>
 												</thead>
 												<tbody>
-													<!-- <tr>
-												<th scope="row">1</th>
-												<td>Mark</td>
-												<td>Mark1</td>
-											</tr> -->
 													<c:forEach var="item" items="${model.listResult}">
-														<tr>
-
+														<tr>															
 															<td>${item.title}</td>
-															<td>${item.shortDescription}</td>
-
+															<td>${item.shortDescription}</td>								
 														</tr>
 													</c:forEach>
 												</tbody>
 											</table>
 											<ul class="pagination" id="pagination"></ul>
-											<input type="hidden" value="" id="page" name="page" /> <input
-												type="hidden" value="" id="maxPageItem" name="maxPageItem" />
+											<input type="hidden" value="" id="page" name="page"/>
+											<input type="hidden" value="" id="maxPageItem" name="maxPageItem"/>
+											<input type="hidden" value="" id="sortName" name="sortName"/>
+											<input type="hidden" value="" id="sortBy" name="sortBy"/>
 										</div>
 									</div>
 								</div>
@@ -63,28 +56,31 @@
 						</div>
 					</div>
 				</div>
-			</div>
 		</form>
-	</div>
-	<!-- /.main-content -->
-	<script type="text/javascript">
-	var totalPages = ${model.totalPage};
-	var currentPage = ${model.page};
-	var limit = 2;
-	$(function () {
-		window.pagObj = $('#pagination').twbsPagination({
-			totalPages: totalPages,
-			visiblePages: 10,
-			startPage: currentPage,
-			onClick: function (event, page) {
-				if (currentPage != page) {
-					$('#maxPageItem').val(limit);
-					$('#page').val(page);
-					$('#formSubmit').submit();
-				}
-			}
-		});
-	});
-	</script>
-</body>
-</html>
+		</div>
+		<!-- /.main-content -->
+		<script>
+			var totalPages = ${model.totalPage};
+			var currentPage = ${model.page};
+			var limit = 2;
+			$(function () {
+				window.pagObj = $('#pagination').twbsPagination({
+					totalPages: totalPages,
+					visiblePages: 10,
+					startPage: currentPage,
+					onPageClick: function (event, page) {
+						if (currentPage != page) {
+							$('#maxPageItem').val(limit);
+							$('#page').val(page);
+							$('#sortName').val('title');
+							$('#sortBy').val('desc');
+							$('#formSubmit').submit();
+						}
+					}
+				});
+			});
+			
+		</script>
+	</body>
+
+	</html>
