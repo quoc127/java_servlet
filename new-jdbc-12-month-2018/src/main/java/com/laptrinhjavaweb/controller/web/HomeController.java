@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.laptrinhjavaweb.service.ICategoryService;
 import com.laptrinhjavaweb.service.INewService;
 
-@WebServlet(urlPatterns = { "/trang-chu" })
+@WebServlet(urlPatterns = { "/trang-chu","/dang-nhap" })
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,10 +25,18 @@ public class HomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String action = request.getParameter("action");
+		if (action != null && action.equals("login")){
+				RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
+				rd.forward(request, response);
+		} else if (action != null && action.equals("logout")) {
+			
+		} else {
+			request.setAttribute("categories", categoryService.findAll());
+			RequestDispatcher rd = request.getRequestDispatcher("views/web/home.jsp");
+			rd.forward(request, response);
+		}
 		
-		request.setAttribute("categories", categoryService.findAll());
-		RequestDispatcher rd = request.getRequestDispatcher("views/web/home.jsp");
-		rd.forward(request, response);
 	}	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
