@@ -1,7 +1,7 @@
 package com.laptrinhjavaweb.model;
 
 
-public class UserModel extends AbstractModel{
+public class UserModel extends AbstractModel<UserModel>{
 	private String password;
 	private int status;
 	private Long roleId;
